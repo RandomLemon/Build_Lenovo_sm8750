@@ -450,11 +450,12 @@ jobs:
           sed -i '/^config LSM$/,/^help$/{ /^[[:space:]]*default/ { /baseband_guard/! s/lockdown/lockdown,baseband_guard/ } }' ./common/security/Kconfig
 
       
-      - name: ⚙️ Set BakaSU (设置BakaSU)
+      - name: ⚙️ Set KSU-Next (设置KSU-Next)
         run: |
           cd kernel_workspace
-          echo "正在配置BakaSU..."
+          echo "正在配置KSU-Next..."
           curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
+          ls -la
           cd ./KernelSU 
           KSU_VERSION=$(expr $(git rev-list --count origin/main 2>/dev/null) + 30700 2>/dev/null || echo 114514)
           echo "KSUVER=$KSU_VERSION" >> $GITHUB_ENV
